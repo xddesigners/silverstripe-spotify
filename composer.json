@@ -1,0 +1,31 @@
+{
+    "name": "xddesigners/silverstripe-spotify",
+    "description": "Spotify podcast integration for SilverStripe: syncs shows and episodes from the Spotify API and renders embeddable players.",
+    "type": "silverstripe-vendormodule",
+    "keywords": ["silverstripe", "spotify", "podcast", "embed", "audio"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Remy Vaartjes",
+            "email": "remy@xd.nl"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "silverstripe/framework": "^4.0 || ^5.0",
+        "silverstripe/cms": "^4.0 || ^5.0",
+        "lekoala/silverstripe-cms-actions": "*",
+        "guzzlehttp/guzzle": "^7.0",
+        "ext-json": "*"
+    },
+    "extra": {
+        "expose": [
+            "client"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "XD\\Spotify\\": "src/"
+        }
+    }
+}

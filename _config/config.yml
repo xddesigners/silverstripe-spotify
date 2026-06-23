@@ -1,0 +1,5 @@
+---
+Name: silverstripe-spotify
+---
+XD\Spotify\Services\SpotifyService:
+  market: 'NL'
