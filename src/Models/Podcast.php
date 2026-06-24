@@ -3,7 +3,7 @@
 namespace XD\Spotify\Models;
 
 use LeKoala\CmsActions\CustomAction;
-use LeKoala\CmsActions\CustomLink;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\GridField\GridField;
@@ -102,12 +102,14 @@ class Podcast extends DataObject
             $sync->setButtonType('outline-primary');
             $actions->push($sync);
 
-            $link = CustomLink::create(
+            $link = LiteralField::create(
                 'open_spotify',
-                _t(__CLASS__ . '.OPEN_SPOTIFY', 'Open on Spotify'),
-                "https://open.spotify.com/show/{$this->SpotifyShowID}"
+                sprintf(
+                    '<a href="%s" target="_blank" class="btn btn-outline-primary" style="color:#008a00"><span class="btn__title">%s</span></a>',
+                    "https://open.spotify.com/show/{$this->SpotifyShowID}",
+                    _t(__CLASS__ . '.OPEN_SPOTIFY', 'Open on Spotify')
+                )
             );
-            $link->setButtonType('outline-dark');
             $actions->push($link);
         }
 

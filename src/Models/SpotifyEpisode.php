@@ -2,7 +2,7 @@
 
 namespace XD\Spotify\Models;
 
-use LeKoala\CmsActions\CustomLink;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
@@ -86,12 +86,14 @@ class SpotifyEpisode extends DataObject
         $actions = parent::getCMSActions();
 
         if ($this->ExternalURL) {
-            $link = CustomLink::create(
+            $link = LiteralField::create(
                 'open_spotify',
-                _t(__CLASS__ . '.OPEN_SPOTIFY', 'Open on Spotify'),
-                $this->ExternalURL
+                sprintf(
+                    '<a href="%s" target="_blank" class="btn btn-outline-primary" style="color:#008a00"><span class="btn__title">%s</span></a>',
+                    $this->ExternalURL,
+                    _t(__CLASS__ . '.OPEN_SPOTIFY', 'Open on Spotify')
+                )
             );
-            $link->setButtonType('outline-dark');
             $actions->push($link);
         }
 
