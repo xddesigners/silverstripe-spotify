@@ -100,8 +100,7 @@ class SpotifyEpisode extends DataObject
         return $actions;
     }
 
-    public function forTemplate()
-    {
+    public function forTemplate(): string    {
         return $this->renderWith(static::class);
     }
 

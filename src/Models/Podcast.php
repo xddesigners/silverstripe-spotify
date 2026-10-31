@@ -121,8 +121,7 @@ class Podcast extends DataObject
         return "https://open.spotify.com/embed/show/{$this->SpotifyShowID}?utm_source=generator";
     }
 
-    public function forTemplate()
-    {
+    public function forTemplate(): string    {
         return $this->renderWith(static::class);
     }
 
