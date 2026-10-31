@@ -3,23 +3,30 @@
 namespace XD\Spotify\Tasks;
 
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\PolyExecution\PolyOutput;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
 use XD\Spotify\Models\Podcast;
 
 class SyncSpotifyEpisodesTask extends BuildTask
 {
-    private static string $segment = 'SyncSpotifyEpisodesTask';
+    protected static string $commandName = 'SyncSpotifyEpisodesTask';
 
-    protected $title = 'Sync Spotify Episodes';
+    protected string $title = 'Sync Spotify Episodes';
 
-    protected $description = 'Fetches podcast episodes and images from the Spotify API for all Podcasts.';
+    protected static string $description = 'Fetches podcast episodes and images from the Spotify API for all Podcasts.';
 
-    public function run($request)
+    private ?PolyOutput $output = null;
+
+    protected function execute(InputInterface $input, PolyOutput $output): int
     {
+        $this->output = $output;
+
         $podcasts = Podcast::get()->filter('SpotifyShowID:not', ['', null]);
 
         if (!$podcasts->count()) {
             $this->log('No Podcasts with a SpotifyShowID found.');
-            return;
+            return Command::SUCCESS;
         }
 
         foreach ($podcasts as $podcast) {
@@ -32,10 +39,12 @@ class SyncSpotifyEpisodesTask extends BuildTask
                 $this->log("ERROR: " . $e->getMessage());
             }
         }
+
+        return Command::SUCCESS;
     }
 
     private function log(string $message): void
     {
-        echo $message . PHP_EOL;
+        $this->output?->writeln($message);
     }
 }

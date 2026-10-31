@@ -11,14 +11,17 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
-        "silverstripe/framework": "^4.0 || ^5.0",
-        "silverstripe/cms": "^4.0 || ^5.0",
+        "php": "^8.3",
+        "silverstripe/framework": "^6.0",
+        "silverstripe/cms": "^6.0",
         "lekoala/silverstripe-cms-actions": "*",
         "guzzlehttp/guzzle": "^7.0",
         "ext-json": "*"
     },
     "extra": {
+        "branch-alias": {
+            "dev-main": "6.x-dev"
+        },
         "expose": [
             "client"
         ]
